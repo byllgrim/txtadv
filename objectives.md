@@ -29,9 +29,12 @@ File format and data structure requirements
 - 9 Let objects contain other objects
 - 10 Permit large MMO worlds
      - Separate content into multiple files?
+     - Allow additions/addons through multiple files?
 - 11 Let part of file be updated without re-writing entire file
 - 12 Allow separate objects to share the same name
 - 13 Allow lazy (JIT) loading of file content
+- 15 Reflect complex function/command regexes in file format
+     - Let function references reflect function arguments
 
 Task delegations
 ================
