@@ -1,0 +1,54 @@
+You are in a hallway. 
+It's a long hallway.
+There is an exit to the north.
+
+>Look
+
+It's a long hallway.
+There is an exit to the north.
+
+>Go north
+
+You are in a hall.
+It is a large square hall.
+There is a book here. There is an exit to the north and south.
+
+>Look
+
+It is a large square hall.
+There is a book here. There is an exit to the north and south.
+
+>Look at book
+
+A dusty old tome.
+
+>Read book
+
+You read a couple of pages. Fairly boring stuff.
+
+>Take book
+
+Taken.
+
+>Go north
+
+You are in the backyard. You're surrounded by overgrown grass.
+There is an apple here. There is an exit to the south.
+
+>Look
+
+You're surrounded by overgrown grass.
+There is an apple here. There is an exit to the south.
+
+>Drop book
+
+Dropped.
+
+>Look
+
+You're surrounded by overgrown grass. 
+There is an apple and a book here. There is an exit to the south.
+
+>Go south
+
+You are in a room.
