@@ -1,16 +1,22 @@
 #include <stdio.h>
 
 int
-main(void)
+main(int argc, char *argv[])
 {
+	int i;
+
+	for (i = 1; i < argc; i++) {
+		printf("TODO open and read %s\n", argv[i]);
+	}
+
 	#ifdef _WIN32
-		puts("Hello, Jalamer!");
+		puts("Hello, MacroHard Wangblows(tm)!");
 	#elif __linux__
 		puts("Hello, Linux_user!");
 	#elif __APPLE__
-		puts("Hello, Galori!");
+		puts("Hello, Steve Jobs' cock!!");
 	#else
-		puts("Hello... Who are you?");
+		puts("Hello... god?");
 	#endif
 
 	return 0;
