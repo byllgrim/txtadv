@@ -6,7 +6,7 @@ main(void)
 	#ifdef _WIN32
 		puts("Hello, Jalamer!");
 	#elif __linux__
-		puts("Hello, Rolber!");
+		puts("Hello, Linux_user!");
 	#elif __APPLE__
 		puts("Hello, Galori!");
 	#else
