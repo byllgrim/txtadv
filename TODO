@@ -1,0 +1,25 @@
+Things that need to be done (highest priority first?):
+
+Get input from user
+  + Use scanf(), gets() or something similar
+  + No need to parse yet. Just read into a buffer
+
+Read game file
+  + You can for instance use fopen() and fread()
+  + No need to parse yet. Just read into a buffer
+
+Make a demo game file
+  + Base it on the 'example_gameplay' file
+  + Use JSON or create a simple custom format
+  + It doesn't need to be complete. A sketch is fine.
+
+Separate engine functionality in different files
+  + For instance: filereading.c, inputparsing.c, ...
+
+Think about how we'll implements game functions
+  + For instance the "look" command
+
+Make datastructures to hold game entities
+  + Make it very simple
+  + Don't work farther than development of the demo game file
+
