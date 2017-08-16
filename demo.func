@@ -1,0 +1,11 @@
+function look (s)
+	print(s)
+end
+
+function = north, south, east, west
+
+function = read
+
+function = take
+
+function = eat

@@ -23,15 +23,3 @@ object = apple
 look = Juicy!
 eat = You're not hungry.
 take = Taken.
-
-function look (s)
-	print(s)
-end
-
-function = north, south, east, west
-
-function = read
-
-function = take
-
-function = eat
