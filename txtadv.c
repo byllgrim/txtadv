@@ -16,7 +16,7 @@ l_alloc(void *ud, void *ptr, size_t osize, size_t nsize)
 	}
 }
 
-const char *
+static const char *
 string_reader(lua_State *L,
               void *data,
               size_t *size)
@@ -33,6 +33,20 @@ string_reader(lua_State *L,
 	return data;
 }
 
+static void
+parse_file(char *name)
+{
+	FILE *fs;
+	char buf[BUFSIZ];
+
+	fs = fopen(name, "r"); /* TODO check return */
+	fread(buf, sizeof(*buf), sizeof(buf), fs); /* TODO check return */
+
+	printf("--------\nfile %s contains:\n%s\n", name, buf);
+
+	fclose(fs);
+}
+
 int
 main(int argc, char *argv[])
 {
@@ -41,7 +55,7 @@ main(int argc, char *argv[])
 
 	/* read game files */
 	for (i = 1; i < argc; i++) {
-		printf("TODO open and read %s\n", argv[i]);
+		parse_file(argv[i]);
 	}
 
 	/* initializing lua */
@@ -60,16 +74,6 @@ main(int argc, char *argv[])
 	lua_getglobal(L, "print");
 	lua_pushliteral(L, "Hello, Lua!");
 	lua_call(L, 1, 0);
-
-	#ifdef _WIN32
-		puts("Hello, MacroHard Wangblows(tm)!");
-	#elif __linux__
-		puts("Hello, Linux_sux_user!");
-	#elif __APPLE__
-		puts("Hello, Steve Jobs' cock!!");
-	#else
-		puts("Hello... god?");
-	#endif
 
 	/* cleanup and exit */
 	lua_close(L);
