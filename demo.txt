@@ -1,0 +1,37 @@
+object = player
+
+object = hallway
+look = It's a long hallway.
+north = hall
+
+object = hall
+look = It is a large square hall.
+object = book
+south = hallway
+north = backyard
+
+object = book
+look = A dusty old tome.
+read = You read a couple of pages. Fairly boring stuff.
+take = Taken.
+
+object = backyard
+look = You're surrounded by overgrown grass.
+object = apple
+
+object = apple
+look = Juicy!
+eat = You're not hungry.
+take = Taken.
+
+function look (s)
+	print(s)
+end
+
+function = north, south, east, west
+
+function = read
+
+function = take
+
+function = eat
