@@ -4,13 +4,27 @@
 #include <stdlib.h>
 #include <string.h>
 
+enum {
+	NAMELEN = 256,
+	MAXOBJ = 32,
+	MAXFUNX = 32,
+};
+
+struct object {
+	char name[NAMELEN];
+	char *objects[MAXOBJ];
+	char *functions[MAXFUNX];
+};
+
 static void *
 l_alloc(void *ud, void *ptr, size_t osize, size_t nsize)
 {
-	(void)ud;  (void)osize;  /* not used */
+	(void)ud;
+	(void)osize;
+
 	if (nsize == 0) {
 		free(ptr);
-		return NULL;
+		return (void *)0;
 	} else {
 		return realloc(ptr, nsize);
 	}
@@ -22,13 +36,13 @@ string_reader(lua_State *L,
               size_t *size)
 {
 	static int i = 1;
+	(void)L;
 
 	if (!i)
 		return (void *)(*size = 0);
 	else
 		i = 0;
 
-	(void)L;
 	*size = strlen(data); /* TODO don't be so naive */
 	return data;
 }
