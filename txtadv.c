@@ -31,17 +31,16 @@ l_alloc(void *ud, void *ptr, size_t osize, size_t nsize)
 }
 
 static const char *
-string_reader(lua_State *L,
-              void *data,
-              size_t *size)
+string_reader(lua_State *L, void *data, size_t *size)
 {
 	static int i = 1;
 	(void)L;
 
-	if (!i)
+	if (!i) {
 		return (void *)(*size = 0);
-	else
+	} else {
 		i = 0;
+	}
 
 	*size = strlen(data); /* TODO don't be so naive */
 	return data;
@@ -59,8 +58,9 @@ remove_newlines(char *str)
 {
 	char *occurence;
 
-	while ( (occurence = strpbrk(str, "\r\n")) != NULL)
+	while ( (occurence = strpbrk(str, "\r\n")) != NULL) {
 		occurence[0] = '\0';
+	}
 }
 
 static void
@@ -88,7 +88,7 @@ parse_file(char *name)
 	FILE *fs;
 
 	fs = fopen(name, "r"); /* TODO check return */
-	parse_objdata(fs); /* TODO differentiate .obj and .func*/
+	parse_objdata(fs); /* TODO differentiate .obj and .func */
 
 	fclose(fs);
 }
