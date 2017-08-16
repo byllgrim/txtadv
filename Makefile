@@ -3,7 +3,8 @@ SRC = ${TARG}.c
 OBJ = ${SRC:.c=.o}
 CPPFLAGS = -DLUA_USE_C89
 CFLAGS = -Os -pedantic -std=c89 -Wall -Wextra ${CPPFLAGS}
-LDFLAGS  = -llua -lm -s -static
+LIB = -L/usr/local/lib
+LDFLAGS  = ${LIB} -llua -lm -s -static
 
 ${TARG}: ${OBJ}
 	${CC} -o $@ ${OBJ} ${LDFLAGS}
