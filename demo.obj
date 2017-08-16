@@ -1,25 +1,24 @@
-object = player
-
-object = hallway
+player
+hallway
 look = It's a long hallway.
 north = hall
 
-object = hall
+hall
 look = It is a large square hall.
 object = book
 south = hallway
 north = backyard
 
-object = book
+book
 look = A dusty old tome.
 read = You read a couple of pages. Fairly boring stuff.
 take = Taken.
 
-object = backyard
+backyard
 look = You're surrounded by overgrown grass.
 object = apple
 
-object = apple
+apple
 look = Juicy!
 eat = You're not hungry.
 take = Taken.

@@ -7,7 +7,7 @@
 enum {
 	NAMELEN = 256,
 	MAXOBJ = 32,
-	MAXFUNX = 32,
+	MAXFUNX = 32
 };
 
 struct object {
@@ -47,6 +47,27 @@ string_reader(lua_State *L,
 	return data;
 }
 
+void
+parse_objdata(FILE *file) /* here is where the obje parse */
+{
+	struct object obj;
+	char line[BUFSIZ];
+	char *ret;
+
+	ret = fgets(line, sizeof(line), file);
+	if (ret == NULL)
+		return;
+	strcpy(obj.name, line);
+	printf("%s happen\n", obj.name);
+
+	fgets(line, sizeof(line), file);
+	if (strlen(line) == 2) {
+		printf("This is a blank line\n");
+	} else {
+		printf("This isn't a blank line '%s'\n",line);
+	}
+}
+
 static void
 parse_file(char *name)
 {
@@ -54,8 +75,7 @@ parse_file(char *name)
 	char buf[BUFSIZ];
 
 	fs = fopen(name, "r"); /* TODO check return */
-	fread(buf, sizeof(*buf), sizeof(buf), fs); /* TODO check return */
-
+	parse_objdata(fs); /* TODO differentiate .obj and .func*/
 	printf("--------\nfile %s contains:\n%s\n", name, buf);
 
 	fclose(fs);
