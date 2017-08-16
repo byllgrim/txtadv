@@ -1,4 +1,3 @@
-#include <lua.h>
 #include <lualib.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -28,6 +27,11 @@ main(int argc, char *argv[])
 	L = lua_newstate(l_alloc, (void *)0); /* TODO check return */
 	luaL_openlibs(L);
 
+	lua_getglobal(L, "print"); /* push lua function */
+	lua_pushliteral(L, "Hello, Lua!"); /* push first arg */
+	/* push rest of args */
+	lua_call(L, 1, 0);
+
 	#ifdef _WIN32
 		puts("Hello, MacroHard Wangblows(tm)!");
 	#elif __linux__
@@ -38,5 +42,6 @@ main(int argc, char *argv[])
 		puts("Hello... god?");
 	#endif
 
+	lua_close(L);
 	return 0;
 }
