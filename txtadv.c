@@ -47,24 +47,38 @@ string_reader(lua_State *L,
 	return data;
 }
 
-void
+static void
+object_set_name(struct object *obj, char *name)
+{
+	strncpy(obj->name, name, sizeof(obj->name));
+	printf("'%s' happen\n", obj->name);
+}
+
+static void
+remove_newlines(char *str)
+{
+	char *occurence;
+
+	while ( (occurence = strpbrk(str, "\r\n")) != NULL)
+		occurence[0] = '\0';
+}
+
+static void
 parse_objdata(FILE *file) /* here is where the obje parse */
 {
-	struct object obj;
+	struct object obj = {0};
 	char line[BUFSIZ];
-	char *ret;
 
-	ret = fgets(line, sizeof(line), file);
-	if (ret == NULL)
-		return;
-	strcpy(obj.name, line);
-	printf("%s happen\n", obj.name);
+	while (fgets(line, sizeof(line), file) != NULL) {
+		remove_newlines(line);
 
-	fgets(line, sizeof(line), file);
-	if (strlen(line) == 2) {
-		printf("This is a blank line\n");
-	} else {
-		printf("This isn't a blank line '%s'\n",line);
+		if (obj.name[0] == 0) {
+			object_set_name(&obj, line);
+		} else if (line[0] == '\0') {
+			printf("This is a blank line\n");
+		} else {
+			printf("This isn't a blank line '%s'\n",line);
+		}
 	}
 }
 
@@ -72,11 +86,9 @@ static void
 parse_file(char *name)
 {
 	FILE *fs;
-	char buf[BUFSIZ];
 
 	fs = fopen(name, "r"); /* TODO check return */
 	parse_objdata(fs); /* TODO differentiate .obj and .func*/
-	printf("--------\nfile %s contains:\n%s\n", name, buf);
 
 	fclose(fs);
 }
