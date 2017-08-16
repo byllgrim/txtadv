@@ -20,16 +20,18 @@ main(int argc, char *argv[])
 	int i;
 	struct lua_State *L;
 
+	/* read game files */
 	for (i = 1; i < argc; i++) {
 		printf("TODO open and read %s\n", argv[i]);
 	}
 
+	/* initializing lua */
 	L = lua_newstate(l_alloc, (void *)0); /* TODO check return */
 	luaL_openlibs(L);
 
-	lua_getglobal(L, "print"); /* push lua function */
-	lua_pushliteral(L, "Hello, Lua!"); /* push first arg */
-	/* push rest of args */
+	/* using lua 'print()' */
+	lua_getglobal(L, "print");
+	lua_pushliteral(L, "Hello, Lua!");
 	lua_call(L, 1, 0);
 
 	#ifdef _WIN32
@@ -42,6 +44,7 @@ main(int argc, char *argv[])
 		puts("Hello... god?");
 	#endif
 
+	/* cleanup and exit */
 	lua_close(L);
-	return 0;
+	return EXIT_SUCCESS;
 }
