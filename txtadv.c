@@ -35,7 +35,7 @@ main(int argc, char *argv[])
 	#ifdef _WIN32
 		puts("Hello, MacroHard Wangblows(tm)!");
 	#elif __linux__
-		puts("Hello, Linux_user!");
+		puts("Hello, Linux_sux_user!");
 	#elif __APPLE__
 		puts("Hello, Steve Jobs' cock!!");
 	#else
