@@ -6,14 +6,18 @@
 
 enum {
 	NAMELEN = 256,
-	MAXOBJ = 32,
-	MAXFUNX = 32
+	MAXCONTENT = 32, /* TODO rename */
+	MAXOBJ = 128
 };
 
 struct object {
 	char name[NAMELEN];
-	char *objects[MAXOBJ];
-	char *functions[MAXFUNX];
+	char *objects[MAXCONTENT];
+	char *functions[MAXCONTENT];
+};
+
+struct obj_list {
+	struct object objs[MAXOBJ]; /* TODO make dynamic? */
 };
 
 static void *
@@ -64,44 +68,50 @@ remove_newlines(char *str)
 }
 
 static void
-parse_objdata(FILE *file) /* here is where the obje parse */
+parse_objdata(struct obj_list *ol, FILE *file)
 {
-	struct object obj = {0};
+	int i;
+	struct object *objs = ol->objs;
 	char line[BUFSIZ];
 
-	while (fgets(line, sizeof(line), file) != NULL) {
+	/* here is where the obje parse */
+	for (i = 0; fgets(line, sizeof(line), file) != NULL; ) {
+		/* TODO index bounds */
+
 		remove_newlines(line);
 
-		if (obj.name[0] == 0) {
-			object_set_name(&obj, line);
-		} else if (line[0] == '\0') {
-			printf("This is a blank line\n");
+		if (objs[i].name[0] == 0) {
+			object_set_name(&objs[i], line);
+		} else if (line[0] == 0) {
+			i++;
+			printf("New object\n");
 		} else {
-			printf("This isn't a blank line '%s'\n",line);
+			printf("TODO add content '%s'\n",line);
 		}
 	}
 }
 
 static void
-parse_file(char *name)
+parse_file(struct obj_list *ol, char *name)
 {
-	FILE *fs;
+	FILE *file;
 
-	fs = fopen(name, "r"); /* TODO check return */
-	parse_objdata(fs); /* TODO differentiate .obj and .func */
+	file = fopen(name, "r"); /* TODO check return */
+	parse_objdata(ol, file); /* TODO differentiate .obj and .func */
 
-	fclose(fs);
+	fclose(file);
 }
 
 int
 main(int argc, char *argv[])
 {
 	int i;
+	struct obj_list ol = {0};
 	struct lua_State *L;
 
 	/* read game files */
 	for (i = 1; i < argc; i++) {
-		parse_file(argv[i]);
+		parse_file(&ol, argv[i]);
 	}
 
 	/* initializing lua */
